@@ -1,4 +1,4 @@
-package com.bnym.attendance_system.services;
+package com.bnym.attendance_system.service;
 
 import java.util.List;
 import java.util.Optional;

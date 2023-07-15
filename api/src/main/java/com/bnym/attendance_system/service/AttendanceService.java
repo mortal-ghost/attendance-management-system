@@ -1,4 +1,4 @@
-package com.bnym.attendance_system.services;
+package com.bnym.attendance_system.service;
 
 import java.util.ArrayList;
 import java.util.List;
