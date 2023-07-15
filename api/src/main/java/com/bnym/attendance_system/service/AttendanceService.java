@@ -42,13 +42,13 @@ public class AttendanceService {
         return attendanceRepository.save(attendance);
     }
 
-    Long deleteAttendance(Attendance attendance) {
-        try {
-            attendanceRepository.delete(attendance);
-            return attendance.getStudentId();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        return null;
-    }
+//    Long deleteAttendance(Attendance attendance) {
+//        try {
+//            attendanceRepository.delete(attendance);
+//            return attendance.getStudentId();
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
+//        return null;
+//    }
 }

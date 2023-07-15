@@ -1,7 +1,10 @@
 package com.bnym.attendance_system.controller;
 
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,38 +16,64 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bnym.attendance_system.models.Student;
+import com.bnym.attendance_system.service.StudentService;
 
 @RestController
 @RequestMapping("/api/student")
 public class StudentController {
-    @GetMapping("/")
-    public List<Student> getAllStudents() {
-        return List.of(new Student());
+
+    private final StudentService studentService;
+
+    @Autowired
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
     }
 
-    @GetMapping("/{id}")
-    public Student getStudentById(@PathVariable(value = "id") Long studentId) {
-        return new Student();
+    @GetMapping
+    public ResponseEntity<List<Student>> getAllStudents() {
+        List<Student> students = studentService.getAllStudents();
+        return new ResponseEntity<>(students, HttpStatus.OK);
     }
 
-    @PostMapping("/")
-    public Student createStudent(@RequestBody Student student) {
-        return new Student();
+    @GetMapping("/{studentId}")
+    public ResponseEntity<Student> getStudentById(@PathVariable long studentId) {
+        Optional<Student> student = Optional.of(studentService.getStudentById(studentId));
+        return student.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @PutMapping("/{id}")
-    public Student updateStudent(@PathVariable(value = "id") Long studentId, @RequestBody Student studentDetails) {
-        return new Student();
+    @PostMapping
+    public ResponseEntity<Student> addStudent(@RequestBody Student student) {
+        Student createdStudent = studentService.addStudent(student);
+        return new ResponseEntity<>(createdStudent, HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteStudent(@PathVariable(value = "id") Long studentId) {
-        return ResponseEntity.ok().build();
+    @PutMapping("/{studentId}")
+    public ResponseEntity<Student> updateStudent(@PathVariable long studentId, @RequestBody Student student) {
+        Optional<Student> existingStudent = Optional.of(studentService.getStudentById(studentId));
+        if (existingStudent.isPresent()) {
+            student.setStudentId(studentId);
+            Student updatedStudent = studentService.updateStudent(student);
+            return new ResponseEntity<>(updatedStudent, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
-    @GetMapping("/class/{id}")
-    public List<Student> getStudentsByClassId(@PathVariable(value = "id") Long classId) {
-        return List.of(new Student());
+    @DeleteMapping("/{studentId}")
+    public ResponseEntity<Void> deleteStudent(@PathVariable long studentId) {
+        Optional<Student> existingStudent = Optional.of(studentService.getStudentById(studentId));
+        if (existingStudent.isPresent()) {
+            studentService.deleteStudentById(studentId);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+    
+    @GetMapping("/class/{classId}")
+    public ResponseEntity<List<Student>> getStudentsByClassId(@PathVariable Long classId) {
+        List<Student> students = studentService.getStudentsByClassId(classId);
+        return new ResponseEntity<>(students, HttpStatus.OK);
     }
 }
-

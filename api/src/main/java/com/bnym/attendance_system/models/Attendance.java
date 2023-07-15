@@ -6,56 +6,60 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name= "attendance")
+@Table(name = "attendance")
 @IdClass(AttendanceId.class)
 public class Attendance {
-    // { studentId, date } is the primary key
 
-    @Column(name = "student_id", length = 10, nullable = false)
     @Id
-    private Long studentId;
-    @Column(name = "date", length = 10, nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "student_id")
+    private Student student;
+
     @Id
-    private Date date; 
-    @Column(name = "attendance", length = 1, nullable = false)
-    private char attendance;
-    /**
-     * @return the studentId
-     */
-    public Long getStudentId() {
-        return studentId;
-    }
-    /**
-     * @param studentId the studentId to set
-     */
-    public void setStudentId(Long studentId) {
-        this.studentId = studentId;
-    }
-    /**
-     * @return the date
-     */
-    public Date getDate() {
-        return date;
-    }
-    /**
-     * @param date the date to set
-     */
-    public void setDate(Date date) {
-        this.date = date;
-    }
-    /**
-     * @return the attendance
-     */
-    public char getAttendance() {
-        return attendance;
-    }
-    /**
-     * @param attendance the attendance to set
-     */
-    public void setAttendance(char attendance) {
-        this.attendance = attendance;
-    }
+    @Column(name = "a_date")
+    private Date date;
+
+    @Column(name = "status")
+    private String status;
+
+    @Column(name = "remarks")
+    private String remarks;
+
+	public Student getStudent() {
+		return student;
+	}
+
+	public void setStudent(Student student) {
+		this.student = student;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getRemarks() {
+		return remarks;
+	}
+
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
+	}
+
 }
