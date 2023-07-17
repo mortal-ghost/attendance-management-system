@@ -9,6 +9,7 @@ public class StudentWithAttendance {
     private String lastName;
     private String status;
     private Long classId;
+    private int rollNumber;
     
     /**
      * @param studentId
@@ -19,13 +20,27 @@ public class StudentWithAttendance {
      * @param classId
      */
     public StudentWithAttendance(Long studentId, LocalDate date, String firstName, String lastName, String status,
-            Long classId) {
+    Long classId, int rollNumber) {
         this.studentId = studentId;
         this.date = date;
         this.firstName = firstName;
         this.lastName = lastName;
         this.status = status;
         this.classId = classId;
+        this.rollNumber = rollNumber;
+    }
+    
+    /**
+     * @return the rollNumber
+     */
+    public int getRollNumber() {
+        return rollNumber;
+    }
+    /**
+     * @param rollNumber the rollNumber to set
+     */
+    public void setRollNumber(int rollNumber) {
+        this.rollNumber = rollNumber;
     }
     /**
      * @return the studentId

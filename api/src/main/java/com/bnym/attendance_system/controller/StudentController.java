@@ -19,7 +19,7 @@ import com.bnym.attendance_system.models.Student;
 import com.bnym.attendance_system.service.StudentService;
 
 @RestController
-@RequestMapping("/api/student")
+@RequestMapping("/api/students")
 public class StudentController {
 
     @Autowired

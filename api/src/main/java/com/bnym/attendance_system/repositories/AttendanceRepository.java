@@ -15,7 +15,7 @@ public interface AttendanceRepository extends JpaRepository<Attendance, Attendan
 
     // Query to fetch student id, first name, last name, class id, date and attendance status 
     // by joining students and attendance table
-    final String query = "SELECT s.student_id, s.first_name, s.last_name, s.class_id, a.a_date, a.attendance_status " +
+    final String query = "SELECT s.student_id, s.first_name, s.last_name, s.class_id, s.roll_number, a.a_date, a.attendance_status " +
                             "FROM students s " +
                             "INNER JOIN attendance a " +
                             "ON s.student_id = a.student_id " +
