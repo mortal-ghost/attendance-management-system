@@ -12,9 +12,9 @@ import com.bnym.attendance_system.repositories.StudentRepository;
 @Service
 public class StudentService {
 	
+    @Autowired
     private final StudentRepository studentRepository;
 
-    @Autowired
     public StudentService(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
     }

@@ -22,9 +22,9 @@ import com.bnym.attendance_system.service.StudentService;
 @RequestMapping("/api/student")
 public class StudentController {
 
+    @Autowired
     private final StudentService studentService;
 
-    @Autowired
     public StudentController(StudentService studentService) {
         this.studentService = studentService;
     }
@@ -52,7 +52,7 @@ public class StudentController {
     public ResponseEntity<Student> updateStudent(@PathVariable long studentId, @RequestBody Student student) {
         Optional<Student> existingStudent = Optional.of(studentService.getStudentById(studentId));
         if (existingStudent.isPresent()) {
-            student.setStudentId(studentId);
+            student.setId(studentId);
             Student updatedStudent = studentService.updateStudent(student);
             return new ResponseEntity<>(updatedStudent, HttpStatus.OK);
         } else {

@@ -1,7 +1,7 @@
 package com.bnym.attendance_system.models;
 
-import java.sql.Date;
 
+import java.time.LocalDate;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -22,7 +22,7 @@ public class Attendance {
 
     @Id
     @Column(name = "a_date")
-    private Date date;
+    private LocalDate date;
 
     @Column(name = "status")
     private String status;
@@ -38,11 +38,11 @@ public class Attendance {
 		this.student = student;
 	}
 
-	public Date getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 

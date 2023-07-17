@@ -1,44 +1,37 @@
 package com.bnym.attendance_system.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.bnym.attendance_system.models.Attendance;
+import com.bnym.attendance_system.models.StudentWithAttendance;
 import com.bnym.attendance_system.repositories.AttendanceRepository;
-import com.bnym.attendance_system.repositories.StudentRepository;
 
+
+@Service
 public class AttendanceService {
-    private final AttendanceRepository attendanceRepository;
-    private final StudentRepository studentRepository;
-
     @Autowired
-    public AttendanceService(AttendanceRepository attendanceRepository, StudentRepository studentRepository) {
+    private final AttendanceRepository attendanceRepository;
+
+    public AttendanceService(AttendanceRepository attendanceRepository) {
         this.attendanceRepository = attendanceRepository;
-        this.studentRepository = studentRepository;
     }
 
-    List<Attendance> getAttendanceByClassId(Long classId) {
-        List<Long> studentIds = studentRepository.findStudentIdByClassId(classId);
-        
-        List<Attendance> attendanceList = new ArrayList<Attendance>();
-        for (Long studentId : studentIds) {
-            attendanceList.addAll(attendanceRepository.findByStudentId(studentId));
-        }
-
-        return attendanceList;
+    public List<StudentWithAttendance> getAttendanceByClassId(Long classId) {
+        return attendanceRepository.getAttendanceByClassId(classId);
     }
 
-    List<Attendance> getAttendanceByStudentId(Long studentId) {
+    public List<Attendance> getAttendanceByStudentId(Long studentId) {
         return attendanceRepository.findByStudentId(studentId);
     }
 
-    Attendance markAttendance(Attendance attendance) {
+    public Attendance markAttendance(Attendance attendance) {
         return attendanceRepository.save(attendance);
     }
 
-    Attendance updateAttendance(Attendance attendance) {
+    public Attendance updateAttendance(Attendance attendance) {
         return attendanceRepository.save(attendance);
     }
 
