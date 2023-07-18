@@ -1,8 +1,6 @@
 package com.bnym.attendance_system.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,9 +16,6 @@ import jakarta.mail.MessagingException;
 public class EmailController {
     @Autowired
     private EmailService emailService;
-
-    @Value("${spring.mail.password}")
-    private String senderPassword;
 
     @PostMapping("/sendEmail")
     public String sendEmail(@RequestBody EmailDetails emailDetails) throws MessagingException {
@@ -41,10 +36,5 @@ public class EmailController {
         }
 
         return "Email sent successfully";
-    }
-
-    @GetMapping
-    public String test() {
-        return senderPassword;
     }
 }
