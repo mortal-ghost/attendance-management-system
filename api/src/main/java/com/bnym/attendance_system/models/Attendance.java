@@ -1,13 +1,10 @@
 package com.bnym.attendance_system.models;
 
-
 import java.time.LocalDate;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -15,27 +12,51 @@ import jakarta.persistence.Table;
 @IdClass(AttendanceId.class)
 public class Attendance {
 
-    @Id
-    @ManyToOne
-    @JoinColumn(name = "student_id")
-    private Student student;
+	@Id
+	@Column(name = "student_id")
+	private Long studentId;
 
-    @Id
-    @Column(name = "a_date")
-    private LocalDate date;
+	@Id
+	@Column(name = "a_date")
+	private LocalDate date;
 
-    @Column(name = "status")
-    private String status;
+	@Column(name = "status")
+	private String status;
 
-    @Column(name = "remarks")
-    private String remarks;
+	@Column(name = "remarks")
+	private String remarks;
 
-	public Student getStudent() {
-		return student;
+	/**
+	 * 
+	 */
+	public Attendance() {
 	}
 
-	public void setStudent(Student student) {
-		this.student = student;
+	/**
+	 * @param studentId
+	 * @param date
+	 * @param status
+	 * @param remarks
+	 */
+	public Attendance(Long studentId, LocalDate date, String status, String remarks) {
+		this.studentId = studentId;
+		this.date = date;
+		this.status = status;
+		this.remarks = remarks;
+	}
+
+	/**
+	 * @return the studentId
+	 */
+	public Long getStudentId() {
+		return studentId;
+	}
+
+	/**
+	 * @param studentId the studentId to set
+	 */
+	public void setStudentId(Long studentId) {
+		this.studentId = studentId;
 	}
 
 	public LocalDate getDate() {

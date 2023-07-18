@@ -8,13 +8,13 @@ public class AttendanceId implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private int student;
+	private Long studentId;
 
     private Date date;
 
-    public AttendanceId(int student, Date date) {
+    public AttendanceId(Long studentId, Date date) {
 		super();
-		this.student = student;
+		this.studentId = studentId;
 		this.date = date;
 	}
 
@@ -27,11 +27,11 @@ public class AttendanceId implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		AttendanceId other = (AttendanceId) obj;
-		return Objects.equals(date, other.date) && student == other.student;
+		return Objects.equals(date, other.date) && studentId == other.studentId;
 	}
 
     @Override
 	public int hashCode() {
-		return Objects.hash(date, student);
+		return Objects.hash(date, studentId);
 	}
 }

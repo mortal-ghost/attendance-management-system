@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AttendanceComponent } from './attendance/attendance.component';
+import { AgGridModule } from 'ag-grid-angular';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { AttendanceComponent } from './attendance/attendance.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    AgGridModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
